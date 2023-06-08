@@ -9,8 +9,8 @@ pipeline {
   triggers { pollSCM('H/1 * * * *') }
 
   options {
-    ansicolor('xterm')
-  }
+    ansiColor('xterm')
+   }
 
   parameters {
     string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
