@@ -31,7 +31,9 @@ pipeline {
   }
 
   post {
-    sh 'echo clean up'
+    always {
+      sh 'echo clean up'
+    }
   }
 
 }
