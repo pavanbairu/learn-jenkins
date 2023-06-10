@@ -22,13 +22,29 @@ pipeline {
 
   stages {
     stage('One') {
+      input {
+        message "Do you approve?"
+        ok "Yes"
+      }
       steps {
         sh 'echo Hello world'
         sh 'echo ${SAMPLE_URL}'
         sh 'echo PERSON - ${PERSON}'
       }
     }
+    stage('Two') {
+      when {
+         expression {
+           GIT_BRANCH == "origin/test"
+         }
+      }
+        steps {
+         sh 'env'
+        }
+    }
   }
+
+
 
   post {
     always {
@@ -37,3 +53,30 @@ pipeline {
   }
 
 }
+
+// pipeline {
+//   agent any
+//   stages {
+//     stage('Parallel') {
+//       parallel {
+//
+//         stage('One') {
+//           steps {
+//             sh 'echo One'
+//           }
+//         }
+//         stage('Two') {
+//           steps {
+//             sh 'echo Two'
+//           }
+//         }
+//         stage('Three') {
+//           steps {
+//             sh 'echo Three'
+//           }
+//         }
+//
+//       }
+//     }
+//   }
+// }
